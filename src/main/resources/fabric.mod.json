@@ -1,0 +1,44 @@
+{
+	"schemaVersion": 1,
+	"id": "no-mace-particles",
+	"version": "${version}",
+	"name": "No Mace Particles",
+	"description": "Hides the particles created by mace smash attacks.",
+	"authors": [
+		"VerrySilly"
+	],
+	"contact": {
+		"sources": "https://github.com/VerrySilly/no-mace-particles"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/no-mace-particles/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"main": [
+			"com.verrysilly.nomaceparticles.NoMaceParticles"
+		],
+		"client": [
+			"com.verrysilly.nomaceparticles.client.NoMaceParticlesClient"
+		]
+	},
+	"mixins": [
+		"no-mace-particles.mixins.json",
+		{
+			"config": "no-mace-particles.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.2",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"custom": {
+        "modmenu": {
+            "links": {
+                "modmenu.discord": "https://discord.gg/yh9cz8Edwy"
+            }
+        }
+    }
+}
