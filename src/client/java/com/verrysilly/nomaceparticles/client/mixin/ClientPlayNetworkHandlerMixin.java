@@ -1,10 +1,7 @@
 package com.verrysilly.nomaceparticles.client.mixin;
 
-import net.minecraft.client.MinecraftClient;
+import com.verrysilly.nomaceparticles.client.MaceHelper;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
 import net.minecraft.network.packet.s2c.play.ParticleS2CPacket;
 import net.minecraft.particle.ParticleType;
 import net.minecraft.particle.ParticleTypes;
@@ -24,21 +21,10 @@ public class ClientPlayNetworkHandlerMixin {
 			return;
 		}
 
-		if (type == ParticleTypes.BLOCK && nomaceparticles$maceHolderNear(packet.getX(), packet.getY(), packet.getZ())) {
+		if ((type == ParticleTypes.BLOCK || type == ParticleTypes.GUST || type == ParticleTypes.GUST_EMITTER_LARGE
+				|| type == ParticleTypes.GUST_EMITTER_SMALL)
+				&& MaceHelper.maceHolderNear(packet.getX(), packet.getY(), packet.getZ())) {
 			ci.cancel();
 		}
-	}
-
-	private static boolean nomaceparticles$maceHolderNear(double x, double y, double z) {
-		ClientWorld world = MinecraftClient.getInstance().world;
-		if (world == null) {
-			return false;
-		}
-		for (PlayerEntity player : world.getPlayers()) {
-			if (player.squaredDistanceTo(x, y, z) <= 16.0 && player.getMainHandStack().isOf(Items.MACE)) {
-				return true;
-			}
-		}
-		return false;
 	}
 }
